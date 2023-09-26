@@ -5,10 +5,13 @@
 //  Created by STI MAC 10 on 2023-09-18.
 //
 
+
 import UIKit
 
 class ViewController: UIViewController {
     
+    
+    // Player turn
     enum Turn {
         case playerX
         case playerO
@@ -16,7 +19,7 @@ class ViewController: UIViewController {
     
   
 
-    
+    // Outlet for elements
     @IBOutlet weak var turnLabel: UILabel!
     @IBOutlet weak var a1: UIButton!
     @IBOutlet weak var a2: UIButton!
@@ -28,7 +31,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var c2: UIButton!
     @IBOutlet weak var c3: UIButton!
    
-    
+    // game state
     var firstTurn = Turn.playerX
     var currentTurn = Turn.playerX
     
@@ -44,7 +47,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         initBoard()
         }
-    
+    // Game Board
     func initBoard()
         {
             board.append(a1)
@@ -58,11 +61,11 @@ class ViewController: UIViewController {
             board.append(c3)
         }
 
-
+// Action when a game board button is tapped
     @IBAction func boardTapAction(_ sender: UIButton) {
     
             addToBoard(sender)
-            
+            // Victory
             if checkForVictory(playerX)
             {
                 xScore += 1
@@ -81,6 +84,7 @@ class ViewController: UIViewController {
             }
         }
         
+        // Check if a player has won with the given symbol
         func checkForVictory(_ s :String) -> Bool
         {
             // Horizontal Victory
@@ -123,12 +127,13 @@ class ViewController: UIViewController {
             
             return false
         }
-        
+        // Check if the given button has the specified symbol
+
         func thisSymbol(_ button: UIButton, _ symbol: String) -> Bool
         {
             return button.title(for: .normal) == symbol
         }
-        
+        // Display a result alert with the game outcome
         func resultAlert(title: String)
         {
             let message = "\nplayerO " + String(oScore) + "\n\nplayerX " + String(xScore)
@@ -142,7 +147,7 @@ class ViewController: UIViewController {
     
     
    
-        
+        // Reset the Game Board
         func resetBoard()
         {
             for button in board
@@ -162,7 +167,9 @@ class ViewController: UIViewController {
             }
             currentTurn = firstTurn
         }
-        
+    
+
+        // Check if the board is full
         func fullBoard() -> Bool
         {
             for button in board
@@ -174,7 +181,7 @@ class ViewController: UIViewController {
             }
             return true
         }
-        
+        // Add a player's symbol to the game board
         func addToBoard(_ sender: UIButton)
         {
             if(sender.title(for: .normal) == nil)
